@@ -374,6 +374,7 @@ namespace Marerial_design_elements
             this.btnCapture.TabIndex = 8;
             this.btnCapture.Values.Image = global::Marerial_design_elements.Properties.Resources.scan__1_;
             this.btnCapture.Values.Text = "Capturar";
+            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
             // 
             // btnDetect
             // 
@@ -448,6 +449,7 @@ namespace Marerial_design_elements
             this.btnDetect.StateTracking.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.btnDetect.TabIndex = 9;
             this.btnDetect.Values.Text = "Detectar face";
+            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
             // 
             // txtPersonName
             // 
