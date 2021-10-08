@@ -14,6 +14,9 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.Face;
 using Emgu.CV.CvEnum;
+using System.IO;
+using System.Threading;
+
 namespace Marerial_design_elements
 {
     public partial class Form1 : KryptonForm
@@ -23,9 +26,11 @@ namespace Marerial_design_elements
         private Image<Bgr, Byte> currentFrame = null;
         Mat frame = new Mat();
         private bool facesDetectionEnabled = false;
-
         CascadeClassifier faceCascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt.xml");
-
+        Image<Bgr, Byte> FaceResult = null;
+        List<Image<Gray, Byte>> TrainedFaces = new List<Image<Gray, byte>>();
+        List<int> PersonLabes = new List<int>();
+        bool EnabledSaveImage = false;
         #endregion
 
         public Form1()
@@ -78,7 +83,30 @@ namespace Marerial_design_elements
                             currentFrame, face, new Bgr(Color.Red).MCvScalar, 2
                             );
 
+                        //3. Adicionar pessoa
+                        //Mostrar a face no picture box para adicionar
+                        Image<Bgr, Byte> resultImage = currentFrame.Convert<Bgr, Byte>();
+                        resultImage.ROI = face;
+                        picDetected.SizeMode = PictureBoxSizeMode.StretchImage;
+                        picDetected.Image = resultImage.Bitmap;
 
+                        if (EnabledSaveImage)
+                        {
+                            //Criar diretório se não existir 
+                            string path = Directory.GetCurrentDirectory() + @"\BancoDeDados";
+                            if (!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                            
+                            //Salvar 10 imagens com delay de um segundo para cada imagem
+                            for (int i = 0; i < 10; i++)
+                            {
+                                //redimensiona a imagem e salva
+                                resultImage.Resize(200, 200, Inter.Cubic)
+                                    .Save(path + @"\" + txtPersonName.Text + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
+                                Thread.Sleep(1000);
+                            }
+                        }
+                        EnabledSaveImage = false;
                     }
                 }
 
@@ -94,5 +122,18 @@ namespace Marerial_design_elements
 
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            btnSave.Enabled = false;
+            btnAddPerson.Enabled = true;
+            EnabledSaveImage = false;
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            btnSave.Enabled = true;
+            btnAddPerson.Enabled = false;
+            EnabledSaveImage = true;
+        }
     }
 }
