@@ -16,6 +16,7 @@ using Emgu.CV.Face;
 using Emgu.CV.CvEnum;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Marerial_design_elements
 {
@@ -28,9 +29,12 @@ namespace Marerial_design_elements
         private bool facesDetectionEnabled = false;
         CascadeClassifier faceCascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt.xml");
         Image<Bgr, Byte> FaceResult = null;
-        List<Image<Gray, Byte>> TrainedFaces = new List<Image<Gray, byte>>();
-        List<int> PersonLabes = new List<int>();
+        private static List<Image<Gray, Byte>> TrainedFaces = new List<Image<Gray, byte>>();
+        private static List<int> PersonLabes = new List<int>();
         bool EnabledSaveImage = false;
+        private static bool isTrainded = false;
+        EigenFaceRecognizer recognizer;
+        private static List<string> PersonsNames = new List<string>();
         #endregion
 
         public Form1()
@@ -42,7 +46,7 @@ namespace Marerial_design_elements
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
-            videoCapture = new Capture("videoplayback.mp4");
+            videoCapture = new Capture("video.mp4");
             videoCapture.ImageGrabbed += ProcessFrame;
             videoCapture.Start();
 
@@ -98,15 +102,50 @@ namespace Marerial_design_elements
                                 Directory.CreateDirectory(path);
                             
                             //Salvar 10 imagens com delay de um segundo para cada imagem
-                            for (int i = 0; i < 10; i++)
-                            {
-                                //redimensiona a imagem e salva
-                                resultImage.Resize(200, 200, Inter.Cubic)
-                                    .Save(path + @"\" + txtPersonName.Text + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
-                                Thread.Sleep(1000);
-                            }
+                            Task.Factory.StartNew(() => { 
+                    
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    //redimensiona a imagem e salva
+                                    resultImage.Resize(200, 200, Inter.Cubic)
+                                        .Save(path + @"\" + txtPersonName.Text + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
+                                    Thread.Sleep(1000);
+                                }
+                            });
                         }
                         EnabledSaveImage = false;
+
+                        if (btnAddPerson.InvokeRequired)
+                        {
+                            btnAddPerson.Invoke(new ThreadStart(delegate {
+                                btnAddPerson.Enabled = true;
+                            }));
+                        }
+
+                        //5. REconhecer a face
+                        if (isTrainded)
+                        {
+                            Image<Gray, Byte> grayFaceResult = 
+                                resultImage.Convert<Gray, Byte>().Resize(200,200,Inter.Cubic);
+                            CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                          
+                            var result = recognizer.Predict(grayFaceResult);
+                            pictureBox2.Image = grayFaceResult.Bitmap;
+                            pictureBox3.Image = TrainedFaces[result.Label].Bitmap;
+                            Debug.WriteLine(result.Label + ". " + result.Distance);
+
+
+                            if (result.Label != -1 && result.Distance < 2000)
+                            {
+                                CvInvoke.PutText(currentFrame, PersonsNames[result.Label], new Point(face.X - 2, face.Y - 2),
+                                 FontFace.HersheyComplex, 1.0, new Bgr(Color.Orange).MCvScalar);
+                            }
+                            else
+                            {
+                                CvInvoke.PutText(currentFrame, "unknow", new Point(face.X - 2, face.Y - 2),
+                                    FontFace.HersheyComplex, 1.0, new Bgr(Color.Orange).MCvScalar);                            
+                            }
+
+                        }
                     }
                 }
 
@@ -134,6 +173,46 @@ namespace Marerial_design_elements
             btnSave.Enabled = true;
             btnAddPerson.Enabled = false;
             EnabledSaveImage = true;
+        }
+
+        private void btnTrain_Click(object sender, EventArgs e)
+        {
+            TrainImageFromDir();
+        }
+        private static bool TrainImageFromDir()
+        {
+            int imagesCount = 0;
+            double Threshold = -1;
+            TrainedFaces.Clear();
+            PersonLabes.Clear();
+            try
+            {
+                string path = Directory.GetCurrentDirectory() + @"\BancoDeDados";
+                string[] files = Directory.GetFiles(path, "*.jpg", SearchOption.AllDirectories);
+
+                foreach(var file in files)
+                {
+                    Image<Gray, Byte> traindImage = new Image<Gray, byte>(file);
+                    TrainedFaces.Add(traindImage);
+                    PersonLabes.Add(imagesCount);
+                    imagesCount++;
+                }
+
+                EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
+                recognizer.Train(TrainedFaces.ToArray(), PersonLabes.ToArray());
+
+                isTrainded = true;
+                Debug.WriteLine(imagesCount);
+                Debug.WriteLine(isTrainded);                
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                isTrainded = false;
+                MessageBox.Show("Não foi possível localizar pessoa:" + ex.Message);
+                return false;
+            }
         }
     }
 }

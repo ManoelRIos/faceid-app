@@ -144,6 +144,9 @@
     <Content Include="haarcascade_frontalface_alt.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="video.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="videoplayback.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
