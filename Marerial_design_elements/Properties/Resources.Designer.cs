@@ -73,9 +73,9 @@ namespace Marerial_design_elements.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Capturar_removebg_preview {
+        internal static System.Drawing.Bitmap face_login_removebg_preview {
             get {
-                object obj = ResourceManager.GetObject("Capturar-removebg-preview", resourceCulture);
+                object obj = ResourceManager.GetObject("face-login-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Marerial_design_elements.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap face_scan__1_ {
+        internal static System.Drawing.Bitmap main_natureza_removebg_preview {
             get {
-                object obj = ResourceManager.GetObject("face-scan (1)", resourceCulture);
+                object obj = ResourceManager.GetObject("main-natureza-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,29 +103,9 @@ namespace Marerial_design_elements.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap minimize {
+        internal static System.Drawing.Bitmap perfil1 {
             get {
-                object obj = ResourceManager.GetObject("minimize", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap scan {
-            get {
-                object obj = ResourceManager.GetObject("scan", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap scan__1_ {
-            get {
-                object obj = ResourceManager.GetObject("scan (1)", resourceCulture);
+                object obj = ResourceManager.GetObject("perfil1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

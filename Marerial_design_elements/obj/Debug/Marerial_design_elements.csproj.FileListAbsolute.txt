@@ -60,5 +60,6 @@ C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\bin\Deb
 C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\bin\Debug\zh-tw\ZedGraph.resources.dll
 C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\bin\Debug\haarcascade_frontalface_alt.xml
 C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\bin\Debug\videoplayback.mp4
-C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\obj\Debug\Marerial_design_elements.csproj.AssemblyReference.cache
 C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\bin\Debug\video.mp4
+C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\bin\Debug\Guna.UI2.dll
+C:\Users\manoel.rios\source\repos\UI_FaceID_app\Marerial_design_elements\obj\Debug\Marerial_design_elements.csproj.AssemblyReference.cache
