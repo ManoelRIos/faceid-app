@@ -33,7 +33,7 @@ namespace Marerial_design_elements
         List<Image<Gray, Byte>> TrainedFaces = new List<Image<Gray, byte>>();
         List<int> PersonLabes = new List<int>();
         bool EnabledSaveImage = false;
-        private static bool isTrainded = false;
+        private static bool isTrained = false;
         EigenFaceRecognizer recognizer;
         List<string> PersonNames = new List<string>();
         #endregion
@@ -43,15 +43,40 @@ namespace Marerial_design_elements
             InitializeComponent();                                                    
         }
 
-        
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void btnOpenCam_Click(object sender, EventArgs e)
         {
+            btnOfCam.Visible = true;
+            camState.Text = "Deligar Webcam";
             if (videoCapture != null) videoCapture.Dispose();
             videoCapture = new Capture();
-            videoCapture.ImageGrabbed += ProcessFrame;
-            videoCapture.Start();
-            //facesDetectionEnabled = true;
+            Application.Idle += ProcessFrame;
+        }
 
+        private void btnOfCam_Click(object sender, EventArgs e)
+        {
+
+            btnOfCam.Visible = false;
+            btnOpenCam.Visible = true;
+            camState.Text = "Ligar Webcam";
+            if (videoCapture != null) videoCapture.Dispose();
+
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            
+            facesDetectionEnabled = true;
+            TrainImageFromDir();
+
+        }
+
+        private void btnSignup_Click(object sender, EventArgs e)
+        {
+            facesDetectionEnabled = true;
+            //btnSave.Enabled = true;
+            //btnAddPerson.Enabled = false;
+            EnabledSaveImage = true;
+            TrainImageFromDir();
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -60,8 +85,9 @@ namespace Marerial_design_elements
             //1. Capturar vídeo
             if(videoCapture != null && videoCapture.Ptr != IntPtr.Zero)
             {
-                videoCapture.Retrieve(frame, 0);
+                videoCapture.Retrieve(frame, 1);
                 currentFrame = frame.ToImage<Bgr, Byte>().Resize(loginPicture.Width, loginPicture.Height, Inter.Cubic);
+
                 //2. Detectar face
                 if (facesDetectionEnabled)
                 {
@@ -73,24 +99,26 @@ namespace Marerial_design_elements
                     CvInvoke.EqualizeHist(grayImage, grayImage);
                     Rectangle[] faces = faceCascadeClassifier.DetectMultiScale(
                         grayImage, 1.1, 3, Size.Empty, Size.Empty);
-                                             
+                                                       
                     //Se detectou o rosto
                     if(faces.Length > 0)
                     {
                         foreach (var face in faces)
                         {
                             //Desenha retangulo no rosto detectado
-                            //CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Red).MCvScalar, 2);
+                            CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Blue).MCvScalar, 2);
+
                             //3. Adicionar pessoa
                             //Mostrar a face no picture box para adicionar
                             Image<Bgr, Byte> resultImage = currentFrame.Convert<Bgr, Byte>();
                             resultImage.ROI = face;
-                            loginPicture.SizeMode = PictureBoxSizeMode.AutoSize;
+                            loginPicture.SizeMode = PictureBoxSizeMode.StretchImage;
                             loginPicture.Image = resultImage.Bitmap;
                             if (EnabledSaveImage)
                             {
                                 //Criar diretório se não existir 
-                                string path = Directory.GetCurrentDirectory() + @"\BancoDeDados";
+                                string path = Directory.GetCurrentDirectory() + @"\DB_APP";
+
                                 if (!Directory.Exists(path))
                                 Directory.CreateDirectory(path);
                                 //Salvar 10 imagens com delay de um segundo para cada imagem
@@ -99,13 +127,13 @@ namespace Marerial_design_elements
                                     for (int i = 0; i < 10; i++)
                                     {
                                         //redimensiona a imagem e salva
-                                        resultImage.Resize(200, 200, Inter.Cubic)
-                                        .Save(path + @"\" + textName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
+                                        resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + textName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
                                         Thread.Sleep(1000);
                                     }
                                 });
                             }
                             EnabledSaveImage = false;
+
                             if (btnSignup.InvokeRequired)
                             {
                                 btnSignup.Invoke(new ThreadStart(delegate
@@ -114,11 +142,12 @@ namespace Marerial_design_elements
                                 }));
                             }
                             //5. Reconhecer a face
-                            if (isTrainded)
+                            if (isTrained)
                             {
                                 Image<Gray, Byte> grayFaceResult = 
                                     resultImage.Convert<Gray, Byte>().Resize(200,200,Inter.Cubic);
-                                CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                          
+
+                                CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                                     
                                 var result = recognizer.Predict(grayFaceResult);
                                 //pictureBox2.Image = grayFaceResult.Bitmap;
                                 //pictureBox3.Image = TrainedFaces[result.Label].Bitmap;
@@ -144,12 +173,7 @@ namespace Marerial_design_elements
             if(currentFrame != null)currentFrame.Dispose();                    
         }
 
-        private void btnSignup_Click(object sender, EventArgs e)
-        {
-            //btnSave.Enabled = true;
-            //btnAddPerson.Enabled = false;
-            EnabledSaveImage = true;
-        }
+  
     
         private void btnTrain_Click(object sender, EventArgs e)
         {
@@ -165,7 +189,7 @@ namespace Marerial_design_elements
            PersonNames.Clear();
            try
            {
-               string path = Directory.GetCurrentDirectory() + @"\BancoDeDados";
+               string path = Directory.GetCurrentDirectory() + @"\DB_APP";
                string[] files = Directory.GetFiles(path, "*.jpg", SearchOption.AllDirectories);
 
                foreach(var file in files)
@@ -179,15 +203,15 @@ namespace Marerial_design_elements
                EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
                recognizer.Train(TrainedFaces.ToArray(), PersonLabes.ToArray());
 
-               isTrainded = true;
+               isTrained = true;
                Debug.WriteLine(imagesCount);
-               Debug.WriteLine(isTrainded);                
+               Debug.WriteLine(isTrained);                
 
                return true;
            }
            catch(Exception ex)
            {
-               isTrainded = false;
+               isTrained = false;
                MessageBox.Show("Não foi possível localizar pessoa:" + ex.Message);
                return false;
            }
@@ -201,7 +225,7 @@ namespace Marerial_design_elements
            Controls.Add(login);*/
         }
 
-     
+        
     }
 }
 
