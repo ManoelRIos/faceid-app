@@ -45,11 +45,22 @@ namespace Marerial_design_elements
 
         private void btnOpenCam_Click(object sender, EventArgs e)
         {
+            
+
             btnOfCam.Visible = true;
             camState.Text = "Deligar Webcam";
+           
             if (videoCapture != null) videoCapture.Dispose();
-            videoCapture = new Capture();
-            Application.Idle += ProcessFrame;
+            try 
+            {
+                videoCapture = new Capture();
+                Application.Idle += ProcessFrame;
+            }
+            catch
+            {
+                MessageBox.Show("Não foi possível identificar uma WebCam");
+            }
+            
         }
 
         private void btnOfCam_Click(object sender, EventArgs e)
@@ -65,7 +76,7 @@ namespace Marerial_design_elements
         private void btnLogin_Click(object sender, EventArgs e)
         {
             
-            facesDetectionEnabled = true;
+            //facesDetectionEnabled = true;
             TrainImageFromDir();
 
         }
@@ -76,7 +87,7 @@ namespace Marerial_design_elements
             //btnSave.Enabled = true;
             //btnAddPerson.Enabled = false;
             EnabledSaveImage = true;
-            TrainImageFromDir();
+            
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -148,7 +159,13 @@ namespace Marerial_design_elements
                                     resultImage.Convert<Gray, Byte>().Resize(200,200,Inter.Cubic);
 
                                 CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                                     
+                              
+                                
                                 var result = recognizer.Predict(grayFaceResult);
+                                if(result.Equals(null))
+                                {
+                                    MessageBox.Show("Não foi possível localiza-lo no nosso banco de dados.");
+                                }
                                 //pictureBox2.Image = grayFaceResult.Bitmap;
                                 //pictureBox3.Image = TrainedFaces[result.Label].Bitmap;
                                 Debug.WriteLine(result.Label + ". " + result.Distance);
@@ -156,7 +173,7 @@ namespace Marerial_design_elements
                                 {
                                     CvInvoke.PutText(currentFrame, PersonNames[result.Label],
                                         new Point(face.X - 2, face.Y - 2),
-                                        FontFace.HersheyComplex, 1.0, new Bgr(Color.Orange).MCvScalar);
+                                        FontFace.HersheyComplex, 1.0, new Bgr(Color.Red).MCvScalar);
                                 }
                                 else
                                 {
@@ -200,7 +217,8 @@ namespace Marerial_design_elements
                    imagesCount++;
                }
 
-               EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
+               //EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
+               recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
                recognizer.Train(TrainedFaces.ToArray(), PersonLabes.ToArray());
 
                isTrained = true;
@@ -211,7 +229,7 @@ namespace Marerial_design_elements
            }
            catch(Exception ex)
            {
-               isTrained = false;
+               isTrained = false; 
                MessageBox.Show("Não foi possível localizar pessoa:" + ex.Message);
                return false;
            }
