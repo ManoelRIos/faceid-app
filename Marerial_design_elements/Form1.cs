@@ -32,7 +32,7 @@ namespace Marerial_design_elements
         Image<Bgr, Byte> faceResult = null;
         List<Image<Gray, Byte>> TrainedFaces = new List<Image<Gray, byte>>();
         List<int> PersonLabes = new List<int>();
-        bool EnabledSaveImage = false;
+        bool EnableSaveImage = false;
         private static bool isTrained = false;
         EigenFaceRecognizer recognizer;
         List<string> PersonNames = new List<string>();
@@ -45,8 +45,8 @@ namespace Marerial_design_elements
 
         private void btnOpenCam_Click(object sender, EventArgs e)
         {
-            
 
+            facesDetectionEnabled = true;
             btnOfCam.Visible = true;
             camState.Text = "Deligar Webcam";
            
@@ -65,7 +65,7 @@ namespace Marerial_design_elements
 
         private void btnOfCam_Click(object sender, EventArgs e)
         {
-
+            facesDetectionEnabled = false;
             btnOfCam.Visible = false;
             btnOpenCam.Visible = true;
             camState.Text = "Ligar Webcam";
@@ -83,11 +83,9 @@ namespace Marerial_design_elements
 
         private void btnSignup_Click(object sender, EventArgs e)
         {
-            facesDetectionEnabled = true;
-            //btnSave.Enabled = true;
+                       
             //btnAddPerson.Enabled = false;
-            EnabledSaveImage = true;
-            
+            EnableSaveImage = true;         
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -125,9 +123,10 @@ namespace Marerial_design_elements
                             resultImage.ROI = face;
                             loginPicture.SizeMode = PictureBoxSizeMode.StretchImage;
                             loginPicture.Image = resultImage.Bitmap;
-                            if (EnabledSaveImage)
+
+                            if (EnableSaveImage)
                             {
-                                //Criar diretório se não existir 
+                                //Criar diretório se não existir  
                                 string path = Directory.GetCurrentDirectory() + @"\DB_APP";
 
                                 if (!Directory.Exists(path))
@@ -143,7 +142,7 @@ namespace Marerial_design_elements
                                     }
                                 });
                             }
-                            EnabledSaveImage = false;
+                            EnableSaveImage = false;
 
                             if (btnSignup.InvokeRequired)
                             {
@@ -157,23 +156,19 @@ namespace Marerial_design_elements
                             {
                                 Image<Gray, Byte> grayFaceResult = 
                                     resultImage.Convert<Gray, Byte>().Resize(200,200,Inter.Cubic);
-
-                                CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                                     
-                              
-                                
-                                var result = recognizer.Predict(grayFaceResult);
-                                if(result.Equals(null))
-                                {
-                                    MessageBox.Show("Não foi possível localiza-lo no nosso banco de dados.");
-                                }
+                                CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                                                                                                  
+                                var result = recognizer.Predict(grayFaceResult);         
                                 //pictureBox2.Image = grayFaceResult.Bitmap;
                                 //pictureBox3.Image = TrainedFaces[result.Label].Bitmap;
                                 Debug.WriteLine(result.Label + ". " + result.Distance);
+
                                 if (result.Label != -1 && result.Distance < 2000)
                                 {
+                                    
                                     CvInvoke.PutText(currentFrame, PersonNames[result.Label],
                                         new Point(face.X - 2, face.Y - 2),
                                         FontFace.HersheyComplex, 1.0, new Bgr(Color.Red).MCvScalar);
+                                    CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Green).MCvScalar, 2);
                                 }
                                 else
                                 {
@@ -211,21 +206,33 @@ namespace Marerial_design_elements
 
                foreach(var file in files)
                {
-                   Image<Gray, Byte> traindImage = new Image<Gray, byte>(file);
-                   TrainedFaces.Add(traindImage);
-                   PersonLabes.Add(imagesCount);
-                   imagesCount++;
+                    Image<Gray, Byte> trainedImage = new Image<Gray, byte>(file);
+                    TrainedFaces.Add(trainedImage);
+                    PersonLabes.Add(imagesCount);
+                    string name = file.Split('\\').Last().Split('_')[0];
+                    PersonNames.Add(name);
+                    imagesCount++;
+                    Debug.WriteLine(imagesCount + ". " + name);                  
+
                }
 
-               //EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
-               recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
-               recognizer.Train(TrainedFaces.ToArray(), PersonLabes.ToArray());
 
-               isTrained = true;
-               Debug.WriteLine(imagesCount);
-               Debug.WriteLine(isTrained);                
+               if(TrainedFaces.Count() > 0)
+               {
+                    //EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
+                    recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
+                    recognizer.Train(TrainedFaces.ToArray(), PersonLabes.ToArray());
+                    isTrained = true;
+                    return true;
+               }
+               else
+               {
+                    isTrained = false;
+                    return false;
+               }            
+                              
 
-               return true;
+               
            }
            catch(Exception ex)
            {
