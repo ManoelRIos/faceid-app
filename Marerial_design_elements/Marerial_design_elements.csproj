@@ -69,6 +69,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,11 +90,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoadingSignUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingSignUp.Designer.cs">
+      <DependentUpon>LoadingSignUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signup.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingSignUp.resx">
+      <DependentUpon>LoadingSignUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -131,6 +141,7 @@
     <None Include="Resources\main-natureza-removebg-preview.png" />
     <None Include="Resources\face-login-removebg-preview.png" />
     <Content Include="Resources\cancel.png" />
+    <None Include="Resources\concluted.png" />
     <Content Include="Resources\face-scan.png" />
     <Content Include="Resources\minimize.png" />
     <Content Include="Resources\stop.png" />

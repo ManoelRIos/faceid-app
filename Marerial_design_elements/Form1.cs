@@ -24,9 +24,11 @@ namespace Marerial_design_elements
     {
         #region variables
         int testid = 0; 
-        private Capture videoCapture = null ;
+        private Capture videoCapture = null;
         private Image<Bgr, Byte> currentFrame = null;
         Mat frame = new Mat();
+        bool faceDetection = false;
+        bool loadShow = true;
         private bool facesDetectionEnabled = false;
         CascadeClassifier faceCascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt.xml");
         Image<Bgr, Byte> faceResult = null;
@@ -35,6 +37,7 @@ namespace Marerial_design_elements
         bool EnableSaveImage = false;
         private static bool isTrained = false;
         EigenFaceRecognizer recognizer;
+        
         List<string> PersonNames = new List<string>();
         #endregion
 
@@ -49,8 +52,9 @@ namespace Marerial_design_elements
             facesDetectionEnabled = true;
             btnOfCam.Visible = true;
             camState.Text = "Deligar Webcam";
-           
+
             if (videoCapture != null) videoCapture.Dispose();
+
             try 
             {
                 videoCapture = new Capture();
@@ -75,17 +79,47 @@ namespace Marerial_design_elements
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+
+            if (!faceDetection)
+            {
+                MessageBox.Show("Não foi detectado um rosto");
+            }
+
+            else
+            {
+                TrainImageFromDir();
+            }
             
-            //facesDetectionEnabled = true;
-            TrainImageFromDir();
 
         }
 
         private void btnSignup_Click(object sender, EventArgs e)
         {
-                       
-            //btnAddPerson.Enabled = false;
-            EnableSaveImage = true;         
+
+            if (!faceDetection)
+            {
+                MessageBox.Show("Não foi detectado um rosto");
+            }
+            else
+            {
+                LoadingSignUp load = new LoadingSignUp();
+                
+                if (loadShow)
+                {
+                    load.Show();
+                    EnableSaveImage = true;
+                    
+                }
+
+                
+
+
+
+
+            }
+
+            
+         
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -108,10 +142,11 @@ namespace Marerial_design_elements
                     CvInvoke.EqualizeHist(grayImage, grayImage);
                     Rectangle[] faces = faceCascadeClassifier.DetectMultiScale(
                         grayImage, 1.1, 3, Size.Empty, Size.Empty);
-                                                       
+                                                                          
                     //Se detectou o rosto
                     if(faces.Length > 0)
                     {
+                        faceDetection = true;
                         foreach (var face in faces)
                         {
                             //Desenha retangulo no rosto detectado
@@ -126,12 +161,16 @@ namespace Marerial_design_elements
 
                             if (EnableSaveImage)
                             {
+                               
+
+
                                 //Criar diretório se não existir  
                                 string path = Directory.GetCurrentDirectory() + @"\DB_APP";
 
                                 if (!Directory.Exists(path))
                                 Directory.CreateDirectory(path);
                                 //Salvar 10 imagens com delay de um segundo para cada imagem
+                                
                                 Task.Factory.StartNew(() => 
                                 { 
                                     for (int i = 0; i < 10; i++)
@@ -141,7 +180,12 @@ namespace Marerial_design_elements
                                         Thread.Sleep(1000);
                                     }
                                 });
+                                
                             }
+                            
+                            
+
+                            
                             EnableSaveImage = false;
 
                             if (btnSignup.InvokeRequired)
@@ -165,6 +209,7 @@ namespace Marerial_design_elements
                                 if (result.Label != -1 && result.Distance < 2000)
                                 {
                                     
+
                                     CvInvoke.PutText(currentFrame, PersonNames[result.Label],
                                         new Point(face.X - 2, face.Y - 2),
                                         FontFace.HersheyComplex, 1.0, new Bgr(Color.Red).MCvScalar);
@@ -178,19 +223,18 @@ namespace Marerial_design_elements
                             }
                         }
                     }
+                    else
+                    {
+                        faceDetection = false;
+                    }
+
+                   
                 }
                 //renderizar a captura do vídeo dentro da Picture box picCapture
                 loginPicture.Image = currentFrame.Bitmap;
             }
             if(currentFrame != null)currentFrame.Dispose();                    
-        }
-
-  
-    
-        private void btnTrain_Click(object sender, EventArgs e)
-        {
-           TrainImageFromDir();
-        }
+        }  
 
         private bool TrainImageFromDir()
         {
