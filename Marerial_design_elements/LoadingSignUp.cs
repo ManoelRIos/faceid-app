@@ -18,7 +18,7 @@ namespace Marerial_design_elements
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        {
+        {            
             timer1.Enabled = true;
             progressSignUp.Increment(1);
             if(progressSignUp.Value == 100)

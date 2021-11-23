@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marerial_design_elements", "Marerial_design_elements\Marerial_design_elements.csproj", "{B10221C7-1EC5-4A7D-82C0-33C2BE662799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aps02-2021", "Marerial_design_elements\Aps02-2021.csproj", "{B10221C7-1EC5-4A7D-82C0-33C2BE662799}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{92C1BC87-DFCF-435A-8E28-75165C6B0D23}"
 EndProject

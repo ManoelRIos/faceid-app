@@ -84,11 +84,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FaceRecogniton.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FaceRecogniton.Designer.cs">
+      <DependentUpon>FaceRecogniton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DadosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DadosForm.Designer.cs">
+      <DependentUpon>DadosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoadingSignUp.cs">
       <SubType>Form</SubType>
@@ -99,8 +105,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signup.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="DadosForm.resx">
+      <DependentUpon>DadosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FaceRecogniton.resx">
+      <DependentUpon>FaceRecogniton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadingSignUp.resx">
       <DependentUpon>LoadingSignUp.cs</DependentUpon>
@@ -145,12 +154,6 @@
     <Content Include="Resources\face-scan.png" />
     <Content Include="Resources\minimize.png" />
     <Content Include="Resources\stop.png" />
-    <Content Include="video.mp4">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="videoplayback.mp4">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -20,9 +20,12 @@ using System.Diagnostics;
 
 namespace Marerial_design_elements
 {
-    public partial class Form1 : KryptonForm
+    public partial class FaceRecogniton : KryptonForm
     {
         #region variables
+        private static DadosForm nivelForm = new DadosForm();
+        private static bool nivel1 = true, nivel2, nivel3;
+        private static int id = 0;
         int testid = 0; 
         private Capture videoCapture = null;
         private Image<Bgr, Byte> currentFrame = null;
@@ -41,7 +44,7 @@ namespace Marerial_design_elements
         List<string> PersonNames = new List<string>();
         #endregion
 
-        public Form1()
+        public FaceRecogniton()
         {
             InitializeComponent();                                                    
         }
@@ -90,7 +93,6 @@ namespace Marerial_design_elements
                 TrainImageFromDir();
             }
             
-
         }
 
         private void btnSignup_Click(object sender, EventArgs e)
@@ -109,17 +111,8 @@ namespace Marerial_design_elements
                     load.Show();
                     EnableSaveImage = true;
                     
-                }
-
-                
-
-
-
-
-            }
-
-            
-         
+                }                
+            }                     
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -175,16 +168,14 @@ namespace Marerial_design_elements
                                 { 
                                     for (int i = 0; i < 10; i++)
                                     {
+                                        if (nivel1) id = 1;                                       
                                         //redimensiona a imagem e salva
-                                        resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + textName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
+                                        resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + id + '_' + textName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
                                         Thread.Sleep(1000);
                                     }
                                 });
                                 
-                            }
-                            
-                            
-
+                            }                                                        
                             
                             EnableSaveImage = false;
 
@@ -198,26 +189,26 @@ namespace Marerial_design_elements
                             //5. Reconhecer a face
                             if (isTrained)
                             {
+
                                 Image<Gray, Byte> grayFaceResult = 
                                     resultImage.Convert<Gray, Byte>().Resize(200,200,Inter.Cubic);
                                 CvInvoke.EqualizeHist(grayFaceResult, grayFaceResult);                                                                                                  
-                                var result = recognizer.Predict(grayFaceResult);         
-                                //pictureBox2.Image = grayFaceResult.Bitmap;
-                                //pictureBox3.Image = TrainedFaces[result.Label].Bitmap;
+                                var result = recognizer.Predict(grayFaceResult);                               
                                 Debug.WriteLine(result.Label + ". " + result.Distance);
 
                                 if (result.Label != -1 && result.Distance < 2000)
-                                {
-                                    
-
+                                {                                    
+                                    NivelUser(id);
                                     CvInvoke.PutText(currentFrame, PersonNames[result.Label],
                                         new Point(face.X - 2, face.Y - 2),
                                         FontFace.HersheyComplex, 1.0, new Bgr(Color.Red).MCvScalar);
                                     CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Green).MCvScalar, 2);
+                                    result.Label = -1; result.Distance = 2000;
+                                    Application.ExitThread()
                                 }
                                 else
-                                {
-                                    CvInvoke.PutText(currentFrame, "unknow", new Point(face.X - 2, face.Y - 2),
+                                {                                    
+                                    CvInvoke.PutText(currentFrame, "Desconhecido", new Point(face.X - 2, face.Y - 2),
                                     FontFace.HersheyComplex, 1.0, new Bgr(Color.Orange).MCvScalar);                            
                                 }
                             }
@@ -254,6 +245,7 @@ namespace Marerial_design_elements
                     TrainedFaces.Add(trainedImage);
                     PersonLabes.Add(imagesCount);
                     string name = file.Split('\\').Last().Split('_')[0];
+                    id = Convert.ToInt32(name);
                     PersonNames.Add(name);
                     imagesCount++;
                     Debug.WriteLine(imagesCount + ". " + name);                  
@@ -262,8 +254,7 @@ namespace Marerial_design_elements
 
 
                if(TrainedFaces.Count() > 0)
-               {
-                    //EigenFaceRecognizer recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
+               {                   
                     recognizer = new EigenFaceRecognizer(imagesCount, Threshold);
                     recognizer.Train(TrainedFaces.ToArray(), PersonLabes.ToArray());
                     isTrained = true;
@@ -272,8 +263,9 @@ namespace Marerial_design_elements
                else
                {
                     isTrained = false;
+                    MessageBox.Show("Não foi possível localizar pessoa no Banco de Dados");
                     return false;
-               }            
+               }        
                               
 
                
@@ -281,19 +273,27 @@ namespace Marerial_design_elements
            catch(Exception ex)
            {
                isTrained = false; 
-               MessageBox.Show("Não foi possível localizar pessoa:" + ex.Message);
+               MessageBox.Show("Não foi possível localizar pessoa no Banco de Dados" + ex.Message);
                return false;
            }
         }
 
-        private void btn_login_Click(object sender, EventArgs e)
+        private static void NivelUser(int idNivel)
         {
-           /*loginForm login = new loginForm();
-           login.TopLevel = false;
-           login.Visible = true;
-           Controls.Add(login);*/
-        }
+            if (nivel1)
+            {
+                MessageBox.Show("Acesso a dados de nível 1");
 
+            }
+            else if (nivel2)
+            {
+                MessageBox.Show("Acesso a dados de nível 2");
+            }
+            else if (nivel3)
+            {
+                MessageBox.Show("Acesso a dados de nível 3");
+            }
+        }
         
     }
 }

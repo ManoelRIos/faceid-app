@@ -16,7 +16,7 @@ namespace Marerial_design_elements
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FaceRecogniton());
         }
     }
 }

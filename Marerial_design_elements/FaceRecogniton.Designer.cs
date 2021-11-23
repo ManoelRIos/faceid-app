@@ -1,7 +1,7 @@
 ﻿
 namespace Marerial_design_elements
 {
-    partial class Form1
+    partial class FaceRecogniton
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -37,13 +37,13 @@ namespace Marerial_design_elements
             this.btnLogin = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnSignup = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btn_login = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.camState = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnOpenCam = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.btnOfCam = new Guna.UI2.WinForms.Guna2CircleButton();
             this.main_PictureBox = new System.Windows.Forms.PictureBox();
             this.loginPicture = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.login_picture = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.loginPic = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.camState = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnOpenCam = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.btnOfCam = new Guna.UI2.WinForms.Guna2CircleButton();
             ((System.ComponentModel.ISupportInitialize)(this.main_PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.login_picture)).BeginInit();
@@ -52,56 +52,66 @@ namespace Marerial_design_elements
             // 
             // kryptonPalette1
             // 
+            this.kryptonPalette1.BasePaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.Width = 0;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.Width = 0;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.Width = 0;
             this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.Rounding = 12;
             this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.ButtonEdgeInset = 10;
             this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, -1, -1, -1);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Poppins", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label1.Location = new System.Drawing.Point(31, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 74);
+            this.label1.Size = new System.Drawing.Size(213, 50);
             this.label1.TabIndex = 0;
             this.label1.Text = "Ministério do Meio \r\nAmbiente";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Location = new System.Drawing.Point(33, 102);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(384, 75);
+            this.label2.Size = new System.Drawing.Size(350, 51);
             this.label2.TabIndex = 1;
             this.label2.Text = "Propriedades rurais que utilizam agrotóxicos proibidos\r\npor causarem grandes impa" +
     "ctos nos\r\nlençóis freáticos, rios e mares.";
@@ -120,7 +130,7 @@ namespace Marerial_design_elements
             this.textName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.textName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.textName.FocusedState.Parent = this.textName;
-            this.textName.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Italic);
+            this.textName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.textName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(173)))), ((int)(((byte)(68)))));
             this.textName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.textName.HoverState.Parent = this.textName;
@@ -153,7 +163,7 @@ namespace Marerial_design_elements
             this.btnLogin.DisabledState.Parent = this.btnLogin;
             this.btnLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(100)))), ((int)(((byte)(174)))));
             this.btnLogin.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(173)))), ((int)(((byte)(68)))));
-            this.btnLogin.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Bold);
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
             this.btnLogin.HoverState.Parent = this.btnLogin;
@@ -184,7 +194,7 @@ namespace Marerial_design_elements
             this.btnSignup.FillColor = System.Drawing.Color.White;
             this.btnSignup.FillColor2 = System.Drawing.Color.White;
             this.btnSignup.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(255)))), ((int)(((byte)(178)))));
-            this.btnSignup.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Bold);
+            this.btnSignup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btnSignup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(173)))), ((int)(((byte)(68)))));
             this.btnSignup.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
             this.btnSignup.HoverState.Parent = this.btnSignup;
@@ -213,7 +223,7 @@ namespace Marerial_design_elements
             this.btn_login.DisabledState.Parent = this.btn_login;
             this.btn_login.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(100)))), ((int)(((byte)(174)))));
             this.btn_login.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(173)))), ((int)(((byte)(68)))));
-            this.btn_login.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.btn_login.ForeColor = System.Drawing.Color.White;
             this.btn_login.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
             this.btn_login.HoverState.Parent = this.btn_login;
@@ -224,52 +234,6 @@ namespace Marerial_design_elements
             this.btn_login.Size = new System.Drawing.Size(200, 45);
             this.btn_login.TabIndex = 9;
             this.btn_login.Text = "Entrar";
-            // 
-            // main_PictureBox
-            // 
-            this.main_PictureBox.Image = global::Marerial_design_elements.Properties.Resources.main_natureza_removebg_preview;
-            this.main_PictureBox.Location = new System.Drawing.Point(12, 105);
-            this.main_PictureBox.Name = "main_PictureBox";
-            this.main_PictureBox.Size = new System.Drawing.Size(507, 429);
-            this.main_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.main_PictureBox.TabIndex = 5;
-            this.main_PictureBox.TabStop = false;
-            // 
-            // loginPicture
-            // 
-            this.loginPicture.BackColor = System.Drawing.Color.Transparent;
-            this.loginPicture.FillColor = System.Drawing.Color.Transparent;
-            this.loginPicture.Image = global::Marerial_design_elements.Properties.Resources.face_login_removebg_preview;
-            this.loginPicture.ImageRotate = 0F;
-            this.loginPicture.Location = new System.Drawing.Point(640, 73);
-            this.loginPicture.Name = "loginPicture";
-            this.loginPicture.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.loginPicture.ShadowDecoration.Parent = this.loginPicture;
-            this.loginPicture.Size = new System.Drawing.Size(250, 250);
-            this.loginPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.loginPicture.TabIndex = 7;
-            this.loginPicture.TabStop = false;
-            this.loginPicture.UseTransparentBackground = true;
-            // 
-            // login_picture
-            // 
-            this.login_picture.ImageRotate = 0F;
-            this.login_picture.Location = new System.Drawing.Point(0, 0);
-            this.login_picture.Name = "login_picture";
-            this.login_picture.ShadowDecoration.Parent = this.login_picture;
-            this.login_picture.Size = new System.Drawing.Size(64, 64);
-            this.login_picture.TabIndex = 0;
-            this.login_picture.TabStop = false;
-            // 
-            // loginPic
-            // 
-            this.loginPic.ImageRotate = 0F;
-            this.loginPic.Location = new System.Drawing.Point(0, 0);
-            this.loginPic.Name = "loginPic";
-            this.loginPic.ShadowDecoration.Parent = this.loginPic;
-            this.loginPic.Size = new System.Drawing.Size(64, 64);
-            this.loginPic.TabIndex = 0;
-            this.loginPic.TabStop = false;
             // 
             // camState
             // 
@@ -284,7 +248,7 @@ namespace Marerial_design_elements
             this.camState.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.camState.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.camState.FocusedState.Parent = this.camState;
-            this.camState.Font = new System.Drawing.Font("Poppins SemiBold", 12F, System.Drawing.FontStyle.Bold);
+            this.camState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.camState.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.camState.HoverState.Parent = this.camState;
             this.camState.Location = new System.Drawing.Point(709, 47);
@@ -347,12 +311,58 @@ namespace Marerial_design_elements
             this.btnOfCam.Visible = false;
             this.btnOfCam.Click += new System.EventHandler(this.btnOfCam_Click);
             // 
-            // Form1
+            // main_PictureBox
+            // 
+            this.main_PictureBox.Image = global::Marerial_design_elements.Properties.Resources.main_natureza_removebg_preview;
+            this.main_PictureBox.Location = new System.Drawing.Point(12, 105);
+            this.main_PictureBox.Name = "main_PictureBox";
+            this.main_PictureBox.Size = new System.Drawing.Size(507, 429);
+            this.main_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.main_PictureBox.TabIndex = 5;
+            this.main_PictureBox.TabStop = false;
+            // 
+            // loginPicture
+            // 
+            this.loginPicture.BackColor = System.Drawing.Color.Transparent;
+            this.loginPicture.FillColor = System.Drawing.Color.Transparent;
+            this.loginPicture.Image = global::Marerial_design_elements.Properties.Resources.face_login_removebg_preview;
+            this.loginPicture.ImageRotate = 0F;
+            this.loginPicture.Location = new System.Drawing.Point(640, 73);
+            this.loginPicture.Name = "loginPicture";
+            this.loginPicture.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.loginPicture.ShadowDecoration.Parent = this.loginPicture;
+            this.loginPicture.Size = new System.Drawing.Size(250, 250);
+            this.loginPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.loginPicture.TabIndex = 7;
+            this.loginPicture.TabStop = false;
+            this.loginPicture.UseTransparentBackground = true;
+            // 
+            // login_picture
+            // 
+            this.login_picture.ImageRotate = 0F;
+            this.login_picture.Location = new System.Drawing.Point(0, 0);
+            this.login_picture.Name = "login_picture";
+            this.login_picture.ShadowDecoration.Parent = this.login_picture;
+            this.login_picture.Size = new System.Drawing.Size(64, 64);
+            this.login_picture.TabIndex = 0;
+            this.login_picture.TabStop = false;
+            // 
+            // loginPic
+            // 
+            this.loginPic.ImageRotate = 0F;
+            this.loginPic.Location = new System.Drawing.Point(0, 0);
+            this.loginPic.Name = "loginPic";
+            this.loginPic.ShadowDecoration.Parent = this.loginPic;
+            this.loginPic.Size = new System.Drawing.Size(64, 64);
+            this.loginPic.TabIndex = 0;
+            this.loginPic.TabStop = false;
+            // 
+            // FaceRecogniton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.ClientSize = new System.Drawing.Size(984, 543);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.btnOfCam);
             this.Controls.Add(this.btnOpenCam);
             this.Controls.Add(this.camState);
@@ -365,7 +375,7 @@ namespace Marerial_design_elements
             this.Controls.Add(this.loginPicture);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "FaceRecogniton";
             this.Palette = this.kryptonPalette1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
