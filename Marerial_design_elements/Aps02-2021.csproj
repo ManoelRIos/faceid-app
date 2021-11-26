@@ -66,10 +66,13 @@
     <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.GLControl.1.1.2225.0\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Messaging" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +82,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
     </Reference>
@@ -104,7 +108,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Signup.cs" />
+    <Compile Include="UC_Dados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Dados.Designer.cs">
+      <DependentUpon>UC_Dados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Info.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Info.Designer.cs">
+      <DependentUpon>UC_Info.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DadosForm.resx">
       <DependentUpon>DadosForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +133,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Dados.resx">
+      <DependentUpon>UC_Dados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Info.resx">
+      <DependentUpon>UC_Info.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
@@ -152,6 +173,13 @@
     <Content Include="Resources\cancel.png" />
     <None Include="Resources\concluted.png" />
     <Content Include="Resources\face-scan.png" />
+    <None Include="Resources\imgSlide.png" />
+    <None Include="Resources\imgSlide1.png" />
+    <None Include="Resources\iconDadosPub.png" />
+    <None Include="Resources\iconDadosPriv.png" />
+    <None Include="Resources\iconDadosConf.png" />
+    <None Include="Resources\iconDadosConfWhite.png" />
+    <None Include="Resources\imgDados.PNG" />
     <Content Include="Resources\minimize.png" />
     <Content Include="Resources\stop.png" />
   </ItemGroup>

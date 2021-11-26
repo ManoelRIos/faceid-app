@@ -25,6 +25,8 @@ namespace Marerial_design_elements
         private void moveImageBox(object sender)
         {
             Guna2Button b = (Guna2Button)sender;
+            imgSlide.Location = new Point(b.Location.X + 108 , b.Location.Y - 34 );
+            imgSlide.SendToBack();
             
         }
 
@@ -32,5 +34,6 @@ namespace Marerial_design_elements
         {
             moveImageBox(sender);
         }
+
     }
 }

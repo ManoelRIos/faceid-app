@@ -204,7 +204,7 @@ namespace Marerial_design_elements
                                         FontFace.HersheyComplex, 1.0, new Bgr(Color.Red).MCvScalar);
                                     CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Green).MCvScalar, 2);
                                     result.Label = -1; result.Distance = 2000;
-                                    Application.ExitThread()
+                                    
                                 }
                                 else
                                 {                                    
@@ -280,9 +280,13 @@ namespace Marerial_design_elements
 
         private static void NivelUser(int idNivel)
         {
-            if (nivel1)
+            if (idNivel == 1)
             {
                 MessageBox.Show("Acesso a dados de nível 1");
+                Application.ExitThread();
+                nivelForm.Show();                
+                UC_Info dado = new UC_Info();
+                dado.InfoText = "Voce acessou o Nível 1";
 
             }
             else if (nivel2)

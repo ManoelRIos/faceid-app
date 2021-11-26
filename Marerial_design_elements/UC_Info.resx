@@ -117,7 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="guna2Elipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="infoText.Text" xml:space="preserve">
+    <value>A área de Saúde Ambiental no Brasil surgiu da necessidade de reconhecimento
+de uma política de saúde mais abrangente, em contraposição à concepção
+reducionista do modelo biomédico, que atuasse sobre os determinantes sociais
+da saúde (ROHLFS et al., 2011). Caracteriza-se como um campo da Saúde Pública
+afeita ao conhecimento científico e à formulação de políticas públicas relacionadas
+à interação entre a saúde humana e os fatores do meio ambiente natural e antrópico
+que a determinam, condicionam e influenciam, visando à melhoria da qualidade de
+vida do ser humano, sob o ponto de vista da sustentabilidade (BRASIL, 2005a).
+No final da década de 1990, foi então conduzida pelo Ministério da Saúde a
+estruturação da Vigilância em Saúde Ambiental (VSA) no âmbito do Sistema Único de
+Saúde (SUS) como Subsistema Nacional de Vigilância em Saúde Ambiental (SINVSA),
+que integra o Sistema Nacional de Vigilância em Saúde.</value>
+  </data>
 </root>
