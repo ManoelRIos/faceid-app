@@ -24,9 +24,8 @@ namespace Marerial_design_elements
     {
         #region variables
         private static DadosForm nivelForm = new DadosForm();
-        private static bool nivel1 = true, nivel2, nivel3;
+        private static bool nivel1 = true;
         private static int id = 0;
-        int testid = 0; 
         private Capture videoCapture = null;
         private Image<Bgr, Byte> currentFrame = null;
         Mat frame = new Mat();
@@ -90,7 +89,9 @@ namespace Marerial_design_elements
 
             else
             {
+                
                 TrainImageFromDir();
+                
             }
             
         }
@@ -282,18 +283,18 @@ namespace Marerial_design_elements
         {
             if (idNivel == 1)
             {
-                MessageBox.Show("Acesso a dados de nível 1");
-                Application.ExitThread();
-                nivelForm.Show();                
+                
+                FaceRecogniton form = new FaceRecogniton();                           
+                nivelForm.Show();            
                 UC_Info dado = new UC_Info();
                 dado.InfoText = "Voce acessou o Nível 1";
 
             }
-            else if (nivel2)
+            else if (idNivel == 2)
             {
                 MessageBox.Show("Acesso a dados de nível 2");
             }
-            else if (nivel3)
+            else if (idNivel == 3)
             {
                 MessageBox.Show("Acesso a dados de nível 3");
             }

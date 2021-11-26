@@ -14,6 +14,7 @@ namespace Marerial_design_elements
     public partial class DadosForm : Form
     {
 
+
         private static FaceRecogniton formLogin = new FaceRecogniton();
 
         public DadosForm()
@@ -33,6 +34,11 @@ namespace Marerial_design_elements
         private void btnNivel3_CheckedChanged(object sender, EventArgs e)
         {
             moveImageBox(sender);
+        }
+
+        private void getPerfilFace()
+        {
+            
         }
 
     }
