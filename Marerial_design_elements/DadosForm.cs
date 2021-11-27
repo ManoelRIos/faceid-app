@@ -14,8 +14,7 @@ namespace Marerial_design_elements
     public partial class DadosForm : Form
     {
 
-
-        private static FaceRecogniton formLogin = new FaceRecogniton();
+        private static DadosForm dados = new DadosForm();
 
         public DadosForm()
         {
@@ -36,10 +35,25 @@ namespace Marerial_design_elements
             moveImageBox(sender);
         }
 
-        private void getPerfilFace()
+        public void nivel1()
         {
-            
+            dados.Show();
+            btnNivel3.Hide();
+            btnNivel2.Hide();
         }
 
+        public void nivel2()
+        {
+            dados.Show();
+            btnNivel3.Hide();
+            btnNivel1.Hide();
+        }
+
+        public void nivel3()
+        {
+            dados.Show();
+            btnNivel1.Hide();
+            btnNivel2.Hide();
+        }
     }
 }

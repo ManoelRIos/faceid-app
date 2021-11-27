@@ -154,10 +154,7 @@ namespace Marerial_design_elements
                             loginPicture.Image = resultImage.Bitmap;
 
                             if (EnableSaveImage)
-                            {
-                               
-
-
+                            {                               
                                 //Criar diretório se não existir  
                                 string path = Directory.GetCurrentDirectory() + @"\DB_APP";
 
@@ -171,7 +168,7 @@ namespace Marerial_design_elements
                                     {
                                         if (nivel1) id = 1;                                       
                                         //redimensiona a imagem e salva
-                                        resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + id + '_' + textName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
+                                        resultImage.Resize(200, 200, Inter.Cubic).Save(path + @"\" + textName.Text + "_" + DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")+".jpg");
                                         Thread.Sleep(1000);
                                     }
                                 });
@@ -198,19 +195,18 @@ namespace Marerial_design_elements
                                 Debug.WriteLine(result.Label + ". " + result.Distance);
 
                                 if (result.Label != -1 && result.Distance < 2000)
-                                {                                    
-                                    NivelUser(id);
+                                {
                                     CvInvoke.PutText(currentFrame, PersonNames[result.Label],
                                         new Point(face.X - 2, face.Y - 2),
                                         FontFace.HersheyComplex, 1.0, new Bgr(Color.Red).MCvScalar);
-                                    CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Green).MCvScalar, 2);
+                                    CvInvoke.Rectangle(currentFrame, face, new Bgr(Color.Green).MCvScalar, 2);                                   
+                                    NivelUser(id);                                    
                                     result.Label = -1; result.Distance = 2000;
                                     
                                 }
                                 else
-                                {                                    
-                                    CvInvoke.PutText(currentFrame, "Desconhecido", new Point(face.X - 2, face.Y - 2),
-                                    FontFace.HersheyComplex, 1.0, new Bgr(Color.Orange).MCvScalar);                            
+                                {
+                                    MessageBox.Show("Não existe no banco de dados!");
                                 }
                             }
                         }
@@ -219,7 +215,6 @@ namespace Marerial_design_elements
                     {
                         faceDetection = false;
                     }
-
                    
                 }
                 //renderizar a captura do vídeo dentro da Picture box picCapture
@@ -246,7 +241,7 @@ namespace Marerial_design_elements
                     TrainedFaces.Add(trainedImage);
                     PersonLabes.Add(imagesCount);
                     string name = file.Split('\\').Last().Split('_')[0];
-                    id = Convert.ToInt32(name);
+                    //id = Convert.ToInt32(name);
                     PersonNames.Add(name);
                     imagesCount++;
                     Debug.WriteLine(imagesCount + ". " + name);                  
@@ -267,9 +262,7 @@ namespace Marerial_design_elements
                     MessageBox.Show("Não foi possível localizar pessoa no Banco de Dados");
                     return false;
                }        
-                              
-
-               
+                                             
            }
            catch(Exception ex)
            {
@@ -283,20 +276,16 @@ namespace Marerial_design_elements
         {
             if (idNivel == 1)
             {
-                
-                FaceRecogniton form = new FaceRecogniton();                           
-                nivelForm.Show();            
-                UC_Info dado = new UC_Info();
-                dado.InfoText = "Voce acessou o Nível 1";
+                nivelForm.nivel1();
 
             }
             else if (idNivel == 2)
             {
-                MessageBox.Show("Acesso a dados de nível 2");
+                nivelForm.nivel2();
             }
             else if (idNivel == 3)
             {
-                MessageBox.Show("Acesso a dados de nível 3");
+                nivelForm.nivel3();
             }
         }
         
